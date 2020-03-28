@@ -1,4 +1,3 @@
-import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -7,36 +6,55 @@ Size getWidgetSize(GlobalKey key) {
   return renderBox?.size;
 }
 
-Flushbar showSuccessToast(BuildContext context, String message) {
-  return Flushbar(
-    title: 'Success',
-    message: message,
-    icon: Icon(
-      Icons.check,
-      size: 28.0,
-      color: Colors.white,
-    ),
-    duration: const Duration(seconds: 4),
-    backgroundGradient: LinearGradient(
-      colors: [Colors.green[600], Colors.green[400]],
-    ),
-    onTap: (flushbar) => flushbar.dismiss(),
-  )..show(context);
+showSuccessToast(BuildContext context, String message) {
+final titleStyle = Theme.of(context).textTheme.title.apply(color: Colors.white);
+  final contentStyle = Theme.of(context).textTheme.body1.apply(color: Colors.white);
+  final buttonStyle = Theme.of(context).textTheme.button.apply(color: Colors.white);
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      // retorna um objeto do tipo Dialog
+      return AlertDialog(
+        backgroundColor: Colors.green[600],
+        title: new Text("Success", style: titleStyle),
+        content: new Text(message, style: contentStyle),
+        actions: <Widget>[
+          // define os botões na base do dialogo
+          new FlatButton(
+            child: Text("OK", style: buttonStyle),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
 }
 
-Flushbar showErrorToast(BuildContext context, String message) {
-  return Flushbar(
-    title: 'Error',
-    message: message,
-    icon: Icon(
-      Icons.error,
-      size: 28.0,
-      color: Colors.white,
-    ),
-    duration: const Duration(seconds: 4),
-    backgroundGradient: LinearGradient(
-      colors: [Colors.red[600], Colors.red[400]],
-    ),
-    onTap: (flushbar) => flushbar.dismiss(),
-  )..show(context);
+showErrorToast(BuildContext context, String message) {
+  final titleStyle = Theme.of(context).textTheme.title.apply(color: Colors.white);
+  final contentStyle = Theme.of(context).textTheme.body1.apply(color: Colors.white);
+  final buttonStyle = Theme.of(context).textTheme.button.apply(color: Colors.white);
+
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      // retorna um objeto do tipo Dialog
+      return AlertDialog(
+        backgroundColor: Colors.red[600],
+        title: new Text("Error", style: titleStyle),
+        content: new Text(message, style: contentStyle),
+        actions: <Widget>[
+          // define os botões na base do dialogo
+          new FlatButton(
+            child: Text("OK", style: buttonStyle),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
 }
