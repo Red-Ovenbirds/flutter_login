@@ -744,7 +744,7 @@ class _RecoverCardState extends State<_RecoverCard>
     final error = await auth.onRecoverPassword(auth.email);
 
     if (error != null) {
-      showErrorToast(context, messages.successTitle, error);
+      showErrorToast(context, messages.errorTitle, error);
       setState(() => _isSubmitting = false);
       _submitController.reverse();
       return false;
